@@ -70,12 +70,11 @@ class FMPDecorator():
 
     @classmethod
     def __build_output_tree(cls, symbol, category):
-        current_day = datetime.today().strftime('%Y-%m-%d')
+        current_day = datetime.now().strftime('%Y-%m-%d')
         current_full_date = datetime.now().strftime("%d-%m-%Y_%Hh%Mmin%Ss")
 
         filename = '_'.join([symbol, current_full_date])
-        _root = '{}'.format('C:' if sys.platform == 'win32' else '/')
+        _root = f"{'C:' if sys.platform == 'win32' else '/'}"
         outdir = os.path.join(_root, 'tmp', category, current_day)
         os.makedirs(outdir, exist_ok=True)
-        fullname = os.path.join(outdir, filename + '.xlsx')
-        return fullname
+        return os.path.join(outdir, f'{filename}.xlsx')
